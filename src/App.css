@@ -1,8 +1,91 @@
+.fade-in {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 0.5em;
+  font-size: 1.3em;
+}
+body {
+  background: #e0e5ec;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
 #root {
-  max-width: 1280px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+.neumorph-card {
+  background: #e0e5ec;
+  border-radius: 20px;
+  box-shadow: 8px 8px 24px #b8bac0, -8px -8px 24px #ffffff;
+  padding: 2em;
+  margin-bottom: 2em;
+  transition: box-shadow 0.3s;
+}
+.neumorph-card:hover {
+  box-shadow: 4px 4px 12px #b8bac0, -4px -4px 12px #ffffff;
+}
+
+.neumorph-table {
+  background: #e0e5ec;
+  border-radius: 16px;
+  box-shadow: 4px 4px 16px #b8bac0, -4px -4px 16px #ffffff;
+  overflow: hidden;
+}
+.neumorph-table th, .neumorph-table td {
+  background: #e0e5ec;
+  border: none;
+  padding: 0.7em 1em;
+}
+.neumorph-table tr {
+  transition: background 0.2s;
+}
+.neumorph-table tr:hover {
+  background: #f0f3f7;
+}
+
+.neumorph-btn {
+  background: #e0e5ec;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 4px 4px 12px #b8bac0, -4px -4px 12px #ffffff;
+  padding: 0.7em 2em;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.neumorph-btn:hover {
+  background: #f0f3f7;
+  box-shadow: 2px 2px 6px #b8bac0, -2px -2px 6px #ffffff;
+}
+
+.neumorph-header {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin-bottom: 1.2em;
+  color: #333;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #b8bac0;
+}
+
+.neumorph-footer {
+  margin-top: 3em;
+  padding: 1em;
+  border-radius: 16px;
+  background: #e0e5ec;
+  box-shadow: 4px 4px 12px #b8bac0, -4px -4px 12px #ffffff;
+  color: #888;
+  font-size: 1em;
 }
 
 .logo {

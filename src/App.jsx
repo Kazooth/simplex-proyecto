@@ -1,7 +1,10 @@
 
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Alert, Card, CardContent } from '@mui/material';
+
+import './App.css';
+import { FaChartLine, FaTable, FaCheckCircle } from 'react-icons/fa';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -23,57 +26,52 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h3" align="center" gutterBottom>
-        Visualización de Optimización Lineal
-      </Typography>
-      {loading && <Box display="flex" justifyContent="center"><CircularProgress /></Box>}
-      {error && <Alert severity="error">{error}</Alert>}
+    <div>
+  <header className="neumorph-header fade-in"><FaChartLine className="icon" />Visualización de Optimización Lineal</header>
+  {loading && <div style={{marginTop: '2em'}}><span className="neumorph-card fade-in"><FaCheckCircle className="icon" />Cargando...</span></div>}
+  {error && <div style={{marginTop: '2em'}}><span className="neumorph-card fade-in" style={{color: '#d32f2f'}}><FaCheckCircle className="icon" />{error}</span></div>}
       {data && (
         <>
-          <Box my={3}>
-            <Card variant="outlined">
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Resultados Simplex</Typography>
-                <Typography variant="body1" color="primary">
-                  <b>Maximización:</b> Z = ${data.max.Z.toLocaleString()} en (x, y) = ({data.max.x.toFixed(2)}, {data.max.y.toFixed(2)})
-                </Typography>
-                <Typography variant="body1" color="secondary">
-                  <b>Minimización:</b> Z = ${data.min.Z.toLocaleString()} en (x, y) = ({data.min.x.toFixed(2)}, {data.min.y.toFixed(2)})
-                </Typography>
-              </CardContent>
-            </Card>
-          </Box>
-          <Box my={3}>
-            <Typography variant="h6" gutterBottom>Vértices Factibles</Typography>
-            <TableContainer component={Paper}>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell><b>x</b></TableCell>
-                    <TableCell><b>y</b></TableCell>
-                    <TableCell><b>Z</b></TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
+          <div className="neumorph-card fade-in">
+            <h2 style={{marginBottom: '1em'}}><FaCheckCircle className="icon" />Resultados Simplex</h2>
+            <div style={{textAlign: 'left'}}>
+              <div style={{color: '#1976d2', fontWeight: 'bold', fontSize: '1.1em'}}><FaCheckCircle className="icon" />Maximización: <span style={{color: '#333'}}>Z = ${data.max.Z.toLocaleString()} en (x, y) = ({data.max.x.toFixed(2)}, {data.max.y.toFixed(2)})</span></div>
+              <div style={{color: '#d32f2f', fontWeight: 'bold', fontSize: '1.1em'}}><FaCheckCircle className="icon" />Minimización: <span style={{color: '#333'}}>Z = ${data.min.Z.toLocaleString()} en (x, y) = ({data.min.x.toFixed(2)}, {data.min.y.toFixed(2)})</span></div>
+            </div>
+          </div>
+          <div className="neumorph-card fade-in">
+            <h2 style={{marginBottom: '1em'}}><FaTable className="icon" />Vértices Factibles</h2>
+            <div style={{overflowX: 'auto'}}>
+              <table className="neumorph-table" style={{width: '100%', margin: '0 auto'}}>
+                <thead>
+                  <tr>
+                    <th>x</th>
+                    <th>y</th>
+                    <th>Z</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {data.vertices.map((v, idx) => (
-                    <TableRow key={idx}>
-                      <TableCell>{v.x.toFixed(2)}</TableCell>
-                      <TableCell>{v.y.toFixed(2)}</TableCell>
-                      <TableCell>{v.Z.toLocaleString()}</TableCell>
-                    </TableRow>
+                    <tr key={idx}>
+                      <td>{v.x.toFixed(2)}</td>
+                      <td>{v.y.toFixed(2)}</td>
+                      <td>{v.Z.toLocaleString()}</td>
+                    </tr>
                   ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>
-          <Box my={3} textAlign="center">
-            <Typography variant="h6" gutterBottom>Gráfico de la Región Factible</Typography>
-            <img src={`${API_URL}/grafico`} alt="Gráfico de optimización" style={{ maxWidth: '100%', borderRadius: 8, boxShadow: '0 2px 8px #0002' }} />
-          </Box>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="neumorph-card fade-in" style={{textAlign: 'center'}}>
+            <h2 style={{marginBottom: '1em'}}><FaChartLine className="icon" />Gráfico de la Región Factible</h2>
+            <img src={`${API_URL}/grafico`} alt="Gráfico de optimización" style={{ maxWidth: '100%', borderRadius: 16, boxShadow: '4px 4px 12px #b8bac0, -4px -4px 12px #ffffff', animation: 'fadeIn 1.2s' }} />
+          </div>
         </>
       )}
-    </Container>
+      <footer className="neumorph-footer">
+        &copy; {new Date().getFullYear()} Proyecto Simplex — Desarrollado por Kazooth
+      </footer>
+    </div>
   );
 }
 
